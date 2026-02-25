@@ -22,10 +22,11 @@ print(format_linter_error(error=error))
 
 
 def format_single_linter_file(file_path: str, errors: list) -> dict:
-    return {"errors": [format_linter_error(i) for i in errors],
-            "path": file_path,
-            "status": "failed" if errors else "passed"
-            }
+    return {
+        "errors": [format_linter_error(error) for error in errors],
+        "path": file_path,
+        "status": "failed" if errors else "passed"
+     }
 errors = [
     {
         "code": "E501",
@@ -50,14 +51,8 @@ errors = [
 print(format_single_linter_file(file_path="./source_code_2.py", errors=errors))
 
 
-
-
-
 def format_linter_report(linter_report: dict) -> list:
-    return [format_single_linter_file(file_path, errors) for file_path, errors in linter_report.items()
-             ]
-
-
+    return [format_single_linter_file(file_path, errors) for file_path, errors in linter_report.items()]
 
 
 report_file = {
